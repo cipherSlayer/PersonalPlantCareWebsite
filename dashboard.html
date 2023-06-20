@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/stylesDash.css">
+  
+</head>
+<body>
+  <nav>
+    <h2>Dashboard</h2>
+    <ul id ='navigation'>
+      <li><a href="Home">Home</a></li>
+      <li><a href="graph.html">Graph</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Logout</a></li>
+      <li><button id="toggleButton" class="nav-button">Toggle Graphs</button></li>
+      
+    </ul>
+  </nav>
+
+  <div class="chart-container">
+    <div class="chart-box">
+      <canvas id="chart1"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="chart2"></canvas>
+    </div>
+  </div>
+
+
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
