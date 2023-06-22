@@ -1,35 +1,132 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/stylesDash.css">
-  
-</head>
-<body>
-  <nav>
-    <h2>Dashboard</h2>
-    <ul id ='navigation'>
-      <li><a href="Home">Home</a></li>
-      <li><a href="graph.html">Graph</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="#">Logout</a></li>
-      <li><button id="toggleButton" class="nav-button">Toggle Graphs</button></li>
-      
-    </ul>
-  </nav>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/png" href="styles/background-images/faviconplant.png">
+    <title>IoT Plant Care Dashboard</title>
 
-  <div class="chart-container">
-    <div class="chart-box">
-      <canvas id="chart1"></canvas>
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/dashboardstyle.css">
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span> IoT Plantcare Service
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          
+
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+
+          <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <p class="font-weight-bold">DASHBOARD</p>
+        </div>
+
+        <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Suggestion</p>
+              <span class="material-icons-outlined text-red">notification_important</span>
+            </div>
+            <span id="sugesstion" class="text-primary font-weight-bold"></span>
+          </div>
+        </div>
+
+        <div class="charts">
+
+          
+
+          <div class="charts-card">
+            <p class="chart-title">Soil Moisture</p>
+            <div class="chart-dropdown">
+              <select id="soil-dropdown" onchange="updateSoilChart()">
+                <!-- Dropdown options for Soil Moisture -->
+                <option value="1">Day 1</option>
+                <option value="2">Day 2</option>
+                <option value="3">Day 3</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div id="chart-soil"></div>
+          </div>
+
+          <div class="charts-card">
+            <p class="chart-title">Temperature</p>
+            <div class="chart-dropdown">
+              <select id="temp-dropdown" onchange="updateTempChart()">
+                <!-- Dropdown options for Soil Moisture -->
+                <option value="1">Day 1</option>
+                <option value="2">Day 2</option>
+                <option value="3">Day 3</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div id="chart-temp"></div>
+          </div>
+
+          
+
+        </div>
+      </main>
+      <!-- End Main -->
+
     </div>
-    <div class="chart-box">
-      <canvas id="chart2"></canvas>
-    </div>
-  </div>
 
-
-
-  <script src="dashboard.js"></script>
-</body>
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+  </body>
 </html>
