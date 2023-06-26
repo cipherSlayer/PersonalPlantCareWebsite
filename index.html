@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="styles/indexsytle.css">
-</head>
-<body>
-  <div class="container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  </div>
+<html lang="en">
 
-  <script src="js/index.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> <!--Mail und Lock Icon -->
+    <link rel="icon" type="image/png" href="styles/background-images/faviconplant.png">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>Login</header>
+        <form action="#">
+            <div class="field email">
+                <div class="input-area">
+                    <input type="text" placeholder="Email Address">
+                    <i class="icon fas fa-envelope"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Email can't be blank</div>
+            </div>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="password" placeholder="Password">
+                    <i class="icon fas fa-lock"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Password can't be blank</div>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+        <div class="sign-txt">No account? <a href="#">Request Access</a></div>
+    </div>
+
+    <script src="js/index.js"></script>
+
 </body>
+
 </html>
