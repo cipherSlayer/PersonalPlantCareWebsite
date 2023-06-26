@@ -31,26 +31,21 @@ document.querySelector('form').addEventListener('submit', function(event) {
   .then(response => {
     if (response.ok) {
       console.log('grant access');
-      alert('Login successful');
-    window.location.href = "dashboard.html";
+      //alert('Login successful');
+      window.location.href = "dashboard.html";
     } else {
       console.log('Error:', response.statusText);
-      alert('Invalid username or password');
+      var errorTxt = document.querySelector('error error-txt');
+      errorTxt.textContent = "Something wrent wrong";
+
     }
   })
   .catch(error => {
     console.log('Error:', error);
   });
-  
-
-
-
-
-
   }
 });
 
-// Funktion zum Anzeigen von Fehlermeldungen
 function showError(errorMessage) {
   var errorText = document.querySelector('.error-txt');
   errorText.textContent = errorMessage;

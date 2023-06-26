@@ -1,0 +1,104 @@
+{
+    "soilmoistureData": [
+      {
+        "soilMoisture": 0.20,
+        "hour": 0
+      },
+      {
+        "hour": 1,
+        "soilMoisture": 0.21
+      },
+      {
+        "hour": 2,
+        "soilMoisture": 0.22
+      },
+      {
+        "hour": 3,
+        "soilMoisture": 0.23
+      },
+      {
+        "hour": 4,
+        "soilMoisture": 0.24
+      },
+      {
+        "hour": 5,
+        "soilMoisture": 0.25
+      },
+      {
+        "hour": 6,
+        "soilMoisture": 0.26
+      },
+      {
+        "hour": 7,
+        "soilMoisture": 0.27
+      },
+      {
+        "hour": 8,
+        "soilMoisture": 0.28
+      },
+      {
+        "hour": 9,
+        "soilMoisture": 0.29
+      },
+      {
+        "hour": 10,
+        "soilMoisture": 0.30
+      },
+      {
+        "hour": 11,
+        "soilMoisture": 0.31
+      },
+      {
+        "hour": 12,
+        "soilMoisture": 0.32
+      },
+      {
+        "hour": 13,
+        "soilMoisture": 0.33
+      },
+      {
+        "hour": 14,
+        "soilMoisture": 0.34
+      },
+      {
+        "hour": 15,
+        "soilMoisture": 0.35
+      },
+      {
+        "hour": 16,
+        "soilMoisture": 0.36
+      },
+      {
+        "hour": 17,
+        "soilMoisture": 0.37
+      },
+      {
+        "hour": 18,
+        "soilMoisture": 0.38
+      },
+      {
+        "hour": 19,
+        "soilMoisture": 0.39
+      },
+      {
+        "hour": 20,
+        "soilMoisture": 0.32
+      },
+      {
+        "hour": 20,
+        "soilMoisture": 0.33
+      },
+      {
+        "hour": 21,
+        "soilMoisture": 0.34
+      },
+      {
+        "hour": 22,
+        "soilMoisture": 0.35
+      },
+      {
+        "hour": 23,
+        "soilMoisture": 0.36
+      }
+    ]
+  }
