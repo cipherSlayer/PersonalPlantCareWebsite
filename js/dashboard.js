@@ -18,11 +18,6 @@ fetch('config.txt')
     apiKey_1 = config.API_KEY_1;
     apiKey_2 = config.API_KEY_2;
 
-    console.log(url_1);
-    console.log(url_2);
-    console.log(apiKey_1);
-    console.log(apiKey_2);
-
   })
   .catch(error => {
     console.error('Error:', error);

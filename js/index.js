@@ -1,3 +1,29 @@
+let url_pw, apiKey_pw;
+
+fetch('config.txt')
+  .then(response => response.text())
+  .then(data => {
+    const lines = data.split('\n');
+    const config = {};
+
+    lines.forEach(line => {
+      const parts = line.split('=');
+      const key = parts[0].trim();
+      const value = parts[1].trim();
+      config[key] = value;
+    });
+
+    url_pw = config.URL_PW;
+    apiKey_pw = config.API_KEY_PW;
+
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+
+
 document.querySelector('form').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -10,8 +36,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
     showError('Password can\'t be blank');
   } else {
 
-    console.log('Email:', user_email);
-    console.log('Password:', user_password);
 
     const data = {
       username: user_email,
@@ -20,18 +44,17 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
     console.log(data);
 
-    fetch('https://iotplantcare-e4290a52c869.herokuapp.com/checkPW', {
+    fetch(url_pw, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'api_key_for_tempMeasuring'
+      'Authorization': apiKey_pw
     },
     body: JSON.stringify(data)
   })
   .then(response => {
     if (response.ok) {
       console.log('grant access');
-      //alert('Login successful');
       window.location.href = "dashboard.html";
     } else {
       console.log('Error:', response.statusText);
