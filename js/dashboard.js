@@ -19,6 +19,12 @@ var areaChartTemp, areaChartOptionsTemp;
 
 var areaChartSoilMoisture, areaChartOptionsSoilMoisture;
 
+var areaChartTempHour, areaChartOptionsTempHour;
+
+var areaChartHumidityHour, areaChartOptionsHumidityHour;
+
+var url_temp_hour_g, api_key_1_g;
+
 async function fetchData() {
   try {
     const response = await fetch('config.txt');
@@ -38,6 +44,9 @@ async function fetchData() {
 
     const url_temp_day = config.url_temp_day;
     const url_soilmoisture_day = config.url_soilmois_day;
+    const url_temp_hour = config.url_temp_hour;
+    url_temp_hour_g = config.url_temp_hour;
+    api_key_1_g = config.api_key_1;
     const api_key_1 = config.api_key_1;
     const url_recommendation = config.url_recommendation;
 
@@ -46,6 +55,10 @@ async function fetchData() {
 
     fill_first_graph(url_temp_day, api_key_1);
     fill_top_left_graph(url_soilmoisture_day,api_key_1);
+
+    //fill_bottom_left_graph(url_temp_hour, 12, api_key_1);
+
+    //fill_bottom_right_graph(url_temp_hour, selectedDay, api_key_1_g);
 
     display_recommendation(url_recommendation, api_key_1);
 
@@ -233,6 +246,168 @@ function display_recommendation(url, apiKey){
 
 }
 
+function fill_bottom_left_graph(url, hour, apiKey){
+
+  const currentDate = new Date();
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth() + 1; //jauar ist 0 nicht 1
+  const currentYear = currentDate.getFullYear();
+
+  const url_to_fetch = `${url}/${hour}/${currentDayOfMonth}/${currentMonth}/${currentYear}`;
+
+  console.log(url_to_fetch);
+
+  areaChartOptionsTempHour = {
+    series: [{
+      name: 'Temp-Hour',
+      data: []
+    }],
+    chart: {
+      height: 350,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: ["#1c7ab0"],
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    xaxis: {
+      categories: [],
+      title: {
+        text: 'Hour'
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Tempearture'
+      }
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    }
+  };
+
+  var areaChartTempHour = new ApexCharts(document.querySelector("#chart-temp-hour"), areaChartOptionsTempHour);
+  areaChartTempHour.render();
+
+  // GET Request
+  fetch(url_to_fetch, {
+    headers: {
+      'Authorization': apiKey
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network Issue');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data.temperatureData)) {
+        throw new Error('Not appropriate JSON Format');
+      }
+
+      areaChartOptionsTempHour.series[0].data = data.temperatureData.map(entry => entry.temperature);
+      areaChartOptionsTempHour.xaxis.categories = data.temperatureData.map(entry => entry.hour);
+
+      areaChartTempHour.updateOptions(areaChartOptionsTempHour);
+      return data;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+
+}
+
+
+function fill_bottom_right_graph(url, hour, apiKey){
+
+  const currentDate = new Date();
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth() + 1; //jauar ist 0 nicht 1
+  const currentYear = currentDate.getFullYear();
+
+  const url_to_fetch = `${url}/${hour}/${currentDayOfMonth}/${currentMonth}/${currentYear}`;
+
+  console.log(url_to_fetch);
+
+  areaChartOptionsHumidityHour = {
+    series: [{
+      name: 'Humidity-Hour',
+      data: []
+    }],
+    chart: {
+      height: 350,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: ["#d1c21f"], 
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    xaxis: {
+      categories: [],
+      title: {
+        text: 'Hour'
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Humidity'
+      }
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    }
+  };
+
+  var areaChartHumidityHour = new ApexCharts(document.querySelector("#chart-humidity-hour"), areaChartOptionsHumidityHour);
+  areaChartHumidityHour.render();
+
+  // GET Request
+  fetch(url_to_fetch, {
+    headers: {
+      'Authorization': apiKey
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network Issue');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data.temperatureData)) {
+        throw new Error('Not appropriate JSON Format');
+      }
+
+      areaChartOptionsHumidityHour.series[0].data = data.temperatureData.map(entry => entry.humidity);
+      areaChartOptionsHumidityHour.xaxis.categories = data.temperatureData.map(entry => entry.hour);
+
+      areaChartHumidityHour.updateOptions(areaChartOptionsHumidityHour);
+      return data;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+
+}
+
+
+
+
 
 fetchData();
 
@@ -248,4 +423,18 @@ function updateSoilChart() {
 function updateTempChart() {
   var selectedDay = document.getElementById('temp-dropdown').value;
   console.log(selectedDay);
+}
+
+function updateTempHourChart() {
+  var selectedDay = document.getElementById('temp-hour-dropdown').value;
+  console.log(selectedDay);
+
+  fill_bottom_left_graph(url_temp_hour_g, selectedDay, api_key_1_g);
+}
+
+function updateHumidityHourChart() {
+  var selectedDay = document.getElementById('humidity-hour-dropdown').value;
+  console.log(selectedDay);
+
+  fill_bottom_right_graph(url_temp_hour_g, selectedDay, api_key_1_g);
 }
