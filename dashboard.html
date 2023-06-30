@@ -6,19 +6,15 @@
     <link rel="icon" type="image/png" href="styles/background-images/faviconplant.png">
     <title>IoT Plant Care Dashboard</title>
 
-    <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/dashboardstyle.css">
   </head>
   <body>
     <div class="grid-container">
 
-      <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
@@ -32,9 +28,7 @@
           <span class="material-icons-outlined">account_circle</span>
         </div>
       </header>
-      <!-- End Header -->
 
-      <!-- Sidebar -->
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
@@ -64,9 +58,7 @@
           </li>
         </ul>
       </aside>
-      <!-- End Sidebar -->
 
-      <!-- Main -->
       <main class="main-container">
         <div class="main-title">
           <p class="font-weight-bold">DASHBOARD</p>
@@ -84,18 +76,14 @@
         </div>
 
         <div class="charts">
-
           
-
           <div class="charts-card">
             <p class="chart-title">Soil Moisture</p>
             <div class="chart-dropdown">
               <select id="soil-dropdown" onchange="updateSoilChart()">
-                <!-- Dropdown options for Soil Moisture -->
                 <option value="1">Day 1</option>
                 <option value="2">Day 2</option>
                 <option value="3">Day 3</option>
-                <!-- Add more options as needed -->
               </select>
             </div>
             <div id="chart-soil"></div>
@@ -105,28 +93,50 @@
             <p class="chart-title">Temperature</p>
             <div class="chart-dropdown">
               <select id="temp-dropdown" onchange="updateTempChart()">
-                <!-- Dropdown options for Soil Moisture -->
                 <option value="1">Day 1</option>
                 <option value="2">Day 2</option>
                 <option value="3">Day 3</option>
-                <!-- Add more options as needed -->
               </select>
             </div>
             <div id="chart-temp"></div>
           </div>
 
-          
-
+          <div class="charts-card">
+            <p class="chart-title">Temperature-Hour</p>
+            <div class="chart-dropdown">
+              <select id="temp-hour-dropdown" onchange="updateTempHourChart()">
+                <option value="1">1 Uhr</option>
+                <option value="2">2 Uhr</option>
+                <option value="3">3 Uhr</option>
+                <option value="4">4 Uhr</option>
+                <option value="5">5 Uhr</option>
+                <option value="6">6 Uhr</option>
+                <option value="7">7 Uhr</option>
+                <option value="8">8 Uhr</option>
+                <option value="9">9 Uhr</option>
+                <option value="10">10 Uhr</option>
+                <option value="11">11 Uhr</option>
+                <option value="12">12 Uhr</option>
+                <option value="13">13 Uhr</option>
+                <option value="14">14 Uhr</option>
+                <option value="15">15 Uhr</option>
+                <option value="16">16 Uhr</option>
+                <option value="17">17 Uhr</option>
+                <option value="18">18 Uhr</option>
+                <option value="19">19 Uhr</option>
+                <option value="20">20 Uhr</option>
+                <option value="21">21 Uhr</option>
+                <option value="22">22 Uhr</option>
+                <option value="23">23 Uhr</option>
+                <option value="24">24 Uhr</option>
+              </select>
+            </div>
+            <div id="chart-temp-hour"></div>
+          </div>
         </div>
       </main>
-      <!-- End Main -->
-
     </div>
-
-    <!-- Scripts -->
-    <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
-    <!-- Custom JS -->
     <script src="js/dashboard.js"></script>
   </body>
 </html>
