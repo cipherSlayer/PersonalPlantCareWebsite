@@ -43,6 +43,35 @@ function calculateMeanValues(data) {
   return updatedData;
 }
 
+function calculateMeanSoilMoisture(data) {
+  const hourMap = {};
+
+  for (const entry of data) {
+    const { hour, soilmoisture } = entry;
+    if (hour in hourMap) {
+      hourMap[hour].push(soilmoisture);
+    } else {
+      hourMap[hour] = [soilmoisture];
+    }
+  }
+
+  for (const hour in hourMap) {
+    const meanSoilMoisture = calculateMean(hourMap[hour]);
+    const entry = {
+      hour: parseInt(hour),
+      soilmoisture: roundToTwoDecimalPlaces(meanSoilMoisture),
+    };
+    hourMap[hour] = entry;
+  }
+
+  const updatedData = [];
+  for (const hour in hourMap) {
+    updatedData.push(hourMap[hour]);
+  }
+
+  return updatedData;
+}
+
 var sidebarOpen = false;
 var sidebar = document.getElementById("sidebar");
 
@@ -102,9 +131,9 @@ async function fetchData() {
     const currentMonth = currentDate.getMonth() + 1; //jauar ist 0 nicht 1
     const currentYear = currentDate.getFullYear();
 
-    await fill_top_right_graph(url_temp_day, api_key_1,30,6,2023); // await fill_top_right_graph(url_temp_day, api_key_1,currentDayOfMonth,currentMonth,currentYear);
+    await fill_top_right_graph(url_temp_day, api_key_1,currentDayOfMonth,currentMonth,currentYear); //await fill_top_right_graph(url_temp_day, api_key_1,30,6,2023); // 
 
-    //fill_top_left_graph(url_soilmoisture_day,api_key_1, currentDayOfMonth,currentMonth,currentYear);
+    await fill_top_left_graph(url_soilmoisture_day,api_key_1, currentDayOfMonth,currentMonth,currentYear); //    await fill_top_left_graph(url_soilmoisture_day,api_key_1, 2,7,2023);
 
 
 
@@ -208,12 +237,12 @@ async function fill_top_right_graph(url, apiKey, day, month, year) {
 
     return data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fteching data:', error);
   }
 }
 
 
-function fill_top_left_graph(url, apiKey, day, month, year) {
+async function fill_top_left_graph(url, apiKey, day, month, year) {
   
   const url_to_fetch = `${url}/${day}/${month}/${year}`;
 
@@ -229,7 +258,7 @@ function fill_top_left_graph(url, apiKey, day, month, year) {
         show: false,
       },
     },
-    colors: ["#b01c1f"],
+    colors: ["#256e30"],
     dataLabels: {
       enabled: false,
     },
@@ -273,14 +302,21 @@ function fill_top_left_graph(url, apiKey, day, month, year) {
         throw new Error('Not appropriate JSON Format');
       }
 
-      areaChartOptionsSoilMoisture.series[0].data = data.soilMoistureData.map(entry => entry.soilmoisture);
-      areaChartOptionsSoilMoisture.xaxis.categories = data.soilMoistureData.map(entry => entry.hour);
+      const soilMoisData = data.soilMoistureData;
+
+      const updatedSoilMoisData = calculateMeanSoilMoisture(soilMoisData);
+
+      console.log("Updated:", updatedSoilMoisData);
+
+
+      areaChartOptionsSoilMoisture.series[0].data = updatedSoilMoisData.map(entry => entry.soilmoisture);
+      areaChartOptionsSoilMoisture.xaxis.categories = updatedSoilMoisData.map(entry => entry.hour);
 
       areaChartSoilMoisture.updateOptions(areaChartOptionsSoilMoisture);
       return data;
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error fteching data:', error);
     });
 }
 
@@ -307,7 +343,7 @@ function display_recommendation(url, apiKey){
       return data;
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      console.error('Error fteching data:', error);
     });
 
 }
